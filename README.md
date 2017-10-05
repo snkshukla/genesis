@@ -5,7 +5,7 @@ Genesis will setup your Macbook from scratch
 ## How to install
 
 ```
-curl -fsSL https://raw.githubusercontent.com/bangthetable/genesis/master/start | ruby
+curl -fsSL https://raw.githubusercontent.com/bangthetable/genesis/master/start | ./start
 ```
 
 ## What it installs
