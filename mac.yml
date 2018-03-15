@@ -47,6 +47,7 @@
     copy: src=file/.gitmessage dest={{ ansible_user_dir }}/.gitmessage
 
   - name: Setup an alias for the loopback adapter
+    sudo: yes
     copy:
       src: loopback.alias.plist
       dest: /Library/LaunchDaemons/loopback.alias.plist
@@ -58,9 +59,11 @@
       dest: /usr/local/etc/dnsmasq.conf
 
   - name: Copy dnsmasq startup plist file
+    sudo: yes
     copy:
       src: homebrew.mxcl.dnsmasq.plist
       dest: /Library/LaunchDaemons/homebrew.mxcl.dnsmasq.plist
+    become: yes
 
   - name: Setup resolver for .test domains
     lineinfile:
