@@ -4,6 +4,11 @@
   hosts: local
 
   tasks:
+
+  - name: Tap caskroom/versions for edge versions
+    homebrew_tap:
+      name: caskroom/versions
+
   - name: Install dev utilities
     homebrew: name={{ item }}
     with_items:
