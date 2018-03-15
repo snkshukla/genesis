@@ -62,7 +62,6 @@
       src: homebrew.mxcl.dnsmasq.plist
       dest: /Library/LaunchDaemons/homebrew.mxcl.dnsmasq.plist
 
-  - name: Setup resolver for .dev domains
   - name: Setup resolver for .test domains
     lineinfile:
       dest: /etc/resolver/test
