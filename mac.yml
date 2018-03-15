@@ -58,8 +58,9 @@
       dest: /Library/LaunchDaemons/homebrew.mxcl.dnsmasq.plist
 
   - name: Setup resolver for .dev domains
+  - name: Setup resolver for .test domains
     lineinfile:
-      dest: /etc/resolver/dev
+      dest: /etc/resolver/test
       line: "nameserver 127.0.0.1"
       create: yes
     become: yes
