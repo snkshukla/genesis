@@ -52,6 +52,11 @@
       src: dnsmasq.conf
       dest: /usr/local/etc/dnsmasq.conf
 
+  - name: Copy dnsmasq startup plist file
+    copy:
+      src: homebrew.mxcl.dnsmasq.plist
+      dest: /Library/LaunchDaemons/homebrew.mxcl.dnsmasq.plist
+
   - name: Setup resolver for .dev domains
     lineinfile:
       dest: /etc/resolver/dev
