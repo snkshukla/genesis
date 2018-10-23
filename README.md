@@ -10,12 +10,22 @@ curl -fsSL https://raw.githubusercontent.com/bangthetable/genesis/master/start |
 The above command will prompt for installing xcode-select, after that installs, enter the password and continue with the script.
 This script will clone the genesis repo into `/tmp/genesis` and then run it for you.
 
-For some reson if it fails and you need to run the script again, you can run it with the follwoing command:
+## Troubleshooting
 
+1. Ansible fails due to errors relating to sudo/password or any other error:
+
+Rerun the script with the following command(-K is for `--ask-become-pass`):
 ```
 cd /tmp/genesis
 ansible-playbook -K mac.yml
 ```
+
+2. Ansible fails because some utility/software was already installed:
+
+  Make sure that you don't have anything pre-installed when running genesis.
+  If you need to install something please ensure brew was used to install it or else the script will fail.
+
+  If you did install something without homebrew, then please delete the software's name from the file, `mac.yml` and rerun the script.
 
 ## What it installs
 

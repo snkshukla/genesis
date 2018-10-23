@@ -12,7 +12,7 @@
 
   - name: Install dev utilities
     homebrew:
-      name: ['vim', 'git', 'fzf', 'the_silver_searcher', 'zsh', 'dnsmasq']
+      name: ['vim', 'git', 'fzf', 'the_silver_searcher', 'zsh', 'z', 'dnsmasq']
 
   - name: Install common software
     homebrew_cask:
@@ -20,6 +20,8 @@
 
   - name: Install oh-my-zsh
     shell: curl -L http://install.ohmyz.sh | sh creates=~/.oh-my-zsh
+    args:
+      warn: no
 
   - name: Initialize z on shell init
     lineinfile: dest=~/.zshrc line=". `brew --prefix`/etc/profile.d/z.sh"
