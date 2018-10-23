@@ -7,6 +7,15 @@ Genesis will setup your Macbook from scratch
 ```
 curl -fsSL https://raw.githubusercontent.com/bangthetable/genesis/master/start | ruby
 ```
+The above command will prompt for installing xcode-select, after that installs, enter the password and continue with the script.
+This script will clone the genesis repo into `/tmp/genesis` and then run it for you.
+
+For some reson if it fails and you need to run the script again, you can run it with the follwoing command:
+
+```
+cd /tmp/genesis
+ansible-playbook -K mac.yml
+```
 
 ## What it installs
 
