@@ -30,6 +30,10 @@
   - name: Initialize z on shell init
     lineinfile: dest=~/.zshrc line=". `brew --prefix`/etc/profile.d/z.sh"
 
+  - name: Install docker-sync gem
+    gem:
+      name: docker-sync
+
   - name: Setup sample gitconfig
     copy: src=file/.gitconfig dest={{ ansible_user_dir }}/.gitconfig
 
