@@ -18,6 +18,10 @@
     homebrew_cask:
       name: ['google-chrome', 'firefox', 'slack', 'iterm2', 'sublime-text', 'alfred', '1password', 'docker-edge']
 
+  - name: Change user shell to zsh
+    user: name={{ ansible_user_id }} shell=/bin/zsh
+    become: true
+
   - name: Install oh-my-zsh
     shell: curl -L http://install.ohmyz.sh | sh creates=~/.oh-my-zsh
     args:
