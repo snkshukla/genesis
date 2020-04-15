@@ -43,12 +43,6 @@
   - name: Copy git commit message sample
     copy: src=file/.gitmessage dest={{ ansible_user_dir }}/.gitmessage
 
-  - name: Setup an alias for the loopback adapter
-    copy:
-      src: loopback.alias.plist
-      dest: /Library/LaunchDaemons/loopback.alias.plist
-    become: yes
-
   - name: Setup dnsmasq configuration file
     copy:
       src: dnsmasq.conf
