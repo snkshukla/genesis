@@ -2,6 +2,9 @@
 
 - name: Macbook Setup
   hosts: local
+  vars:
+    networking_only: "{{ NETWORKING_ONLY | default('false') }}"
+    loopback_alias: "{{ LOOPBACK_ALIAS | default('false') }}"
   become_method: sudo
 
   tasks:
@@ -13,22 +16,32 @@
   - name: Install dev utilities
     homebrew:
       name: ['vim', 'git', 'fzf', 'the_silver_searcher', 'zsh', 'z', 'dnsmasq']
+    when: networking_only != 'true'
+
+  - name: Install dnsmasq
+    homebrew:
+      name: ['dnsmasq']
+    when: networking_only == 'true'
 
   - name: Install common software
     homebrew_cask:
       name: ['google-chrome', 'firefox', 'slack', 'iterm2', 'sublime-text', 'alfred', '1password', 'docker-edge']
+    when: networking_only != 'true'
 
   - name: Change user shell to zsh
     user: name={{ ansible_user_id }} shell=/bin/zsh
     become: true
+    when: networking_only != 'true'
 
   - name: Install oh-my-zsh
     shell: curl -L http://install.ohmyz.sh | sh creates=~/.oh-my-zsh
     args:
       warn: no
+    when: networking_only != 'true'
 
   - name: Initialize z on shell init
     lineinfile: dest=~/.zshrc line=". `brew --prefix`/etc/profile.d/z.sh"
+    when: networking_only != 'true'
 
   - name: Install docker-sync gem
     gem:
@@ -36,22 +49,34 @@
 
   - name: Setup sample gitconfig
     copy: src=file/.gitconfig dest={{ ansible_user_dir }}/.gitconfig
+    when: networking_only != 'true'
+
 
   - name: Copy global gitignore file
     copy: src=file/.gitignore_global dest={{ ansible_user_dir }}/.gitignore_global
+    when: networking_only != 'true'
 
   - name: Copy git commit message sample
     copy: src=file/.gitmessage dest={{ ansible_user_dir }}/.gitmessage
+    when: networking_only != 'true'
 
   - name: Setup an alias for the loopback adapter
     copy:
       src: loopback.alias.plist
       dest: /Library/LaunchDaemons/loopback.alias.plist
     become: yes
+    when: loopback_alias == 'true'
+
+  - name: Remove loopback alias if present
+    file:
+        path: /Library/LaunchDaemons/loopback.alias.plist
+        state: absent
+    become: yes
+    when: loopback_alias != 'true'
 
   - name: Setup dnsmasq configuration file
     copy:
-      src: dnsmasq.conf
+      src: "{{ 'dnsmasq_with_loopbackAlias.conf' if loopback_alias == 'true' else 'dnsmasq.conf' }}"
       dest: /usr/local/etc/dnsmasq.conf
 
   - name: Copy dnsmasq startup plist file

@@ -1,4 +1,5 @@
 #!/usr/bin/env ruby
+cli_flags = ARGV.join(' ')
 
 system 'xcode-select --install'
 
@@ -14,4 +15,8 @@ end
 
 system 'git clone https://github.com/bangthetable/genesis.git /tmp/genesis'
 
-system 'cd /tmp/genesis && ansible-playbook mac.yml -K -vvvv'
+if cli_flags.empty?
+  system 'cd /tmp/genesis && ansible-playbook mac.yml -K -vvvv'
+else
+  system "cd /tmp/genesis && ansible-playbook mac.yml -K -vvvv --extra-vars '#{cli_flags}'"
+end
