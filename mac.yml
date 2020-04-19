@@ -4,7 +4,6 @@
   hosts: local
   vars:
     networking_only: "{{ NETWORKING_ONLY | default('false') }}"
-    loopback_alias: "{{ LOOPBACK_ALIAS | default('false') }}"
   become_method: sudo
 
   tasks:
@@ -65,18 +64,10 @@
       src: loopback.alias.plist
       dest: /Library/LaunchDaemons/loopback.alias.plist
     become: yes
-    when: loopback_alias == 'true'
-
-  - name: Remove loopback alias if present
-    file:
-        path: /Library/LaunchDaemons/loopback.alias.plist
-        state: absent
-    become: yes
-    when: loopback_alias != 'true'
 
   - name: Setup dnsmasq configuration file
     copy:
-      src: "{{ 'dnsmasq_with_loopbackAlias.conf' if loopback_alias == 'true' else 'dnsmasq.conf' }}"
+      src: dnsmasq.conf
       dest: /usr/local/etc/dnsmasq.conf
 
   - name: Copy dnsmasq startup plist file
