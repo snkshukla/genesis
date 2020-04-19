@@ -15,19 +15,14 @@ Run: ```curl -fsSL https://raw.githubusercontent.com/bangthetable/genesis/master
 ### Command line arguments you can pass to the script:
  - `NETWORKING_ONLY=true/false` : If set to `true` (Default value is `false`) installs only the required machine networking. Please note that this is the <strong> absolute minimum setup</strong> that you need to make BTT's apps run locally. If this is not installed/setup properly <strong>the apps won't run locally.</strong>
 
- - `LOOPBACK_ALIAS=true/false`: If set to `true` (Default value is `false`) sets up an RFC 1918 compliant private IP which alias's to your loopback adapter.
-
 PS: The first argument passed to the ruby interpretor here is `-`, this is necessary to let ruby know that the source is `STDIN`.
-
-Example: ```curl -fsSL https://raw.githubusercontent.com/bangthetable/genesis/master/start | ruby - NETWORKING_ONLY=false LOOPBACK_ALIAS=true```
-
 
 The above commands will prompt for installing xcode-select, after that installs, enter the password and continue with the script.
 This script will clone the genesis repo into `/tmp/genesis` and then run it for you.
 
 ## After the install
  - Please reboot your system to let dnsmasq start.
- - Assuming that everything installed correctly, running: `dig dev.ehq.test @localhost` should give you the DNS A record answer `127.0.0.1` (`10.200.10.1` if you've set `LOOPBACK_ALIAS=true`).
+ - Assuming that everything installed correctly, running: `dig dev.ehq.test @localhost` should give you the DNS A record answer `10.200.10.1`.
 
 ## Troubleshooting
 
