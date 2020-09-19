@@ -5,7 +5,7 @@ Genesis will setup your Macbook from scratch
 ## How to install
 
 ```
-curl -fsSL https://raw.githubusercontent.com/bangthetable/genesis/master/start | ruby
+curl -fsSL https://raw.githubusercontent.com/snkshukla/genesis/master/start | ruby
 ```
 The above command will prompt for installing xcode-select, after that installs, enter the password and continue with the script.
 This script will clone the genesis repo into `/tmp/genesis` and then run it for you.

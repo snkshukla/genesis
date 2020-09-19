@@ -1,5 +1,7 @@
 #!/usr/bin/env ruby
 
+system 'xcode-select --install'
+
 unless system('/usr/local/bin/brew -v')
   puts 'Installing homebrew...'
   system %{ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"}
@@ -9,5 +11,7 @@ unless system('/usr/local/bin/ansible --version')
   puts 'Installing ansible...'
   system 'brew install ansible'
 end
+
+system 'git clone https://github.com/snkshukla/genesis.git /tmp/genesis'
 
 system 'ansible-playbook mac.yml -K -vvvv'
