@@ -1,23 +1,13 @@
 # Genesis
 
-Genesis will setup your Macbook from scratch or alternatively setup only the machine networking to get the apps running locally.
+Genesis will setup your Macbook from scratch
 
 ## How to install
 
-### Setup your mac from scratch (Installs developer utilities/tools and the sets up the required machine networking)
-Run: ```
-curl -fsSL https://raw.githubusercontent.com/bangthetable/genesis/master/start | ruby```
-
-### Setup only the required machine networking
-Run: ```curl -fsSL https://raw.githubusercontent.com/bangthetable/genesis/master/start | ruby - NETWORKING_ONLY=true```
-
-
-### Command line arguments you can pass to the script:
- - `NETWORKING_ONLY=true/false` : If set to `true` (Default value is `false`) installs only the required machine networking. Please note that this is the <strong> absolute minimum setup</strong> that you need to make BTT's apps run locally. If this is not installed/setup properly <strong>the apps won't run locally.</strong>
-
-PS: The first argument passed to the ruby interpretor here is `-`, this is necessary to let ruby know that the source is `STDIN`.
-
-The above commands will prompt for installing xcode-select, after that installs, enter the password and continue with the script.
+```
+curl -fsSL https://raw.githubusercontent.com/bangthetable/genesis/master/start | ruby
+```
+The above command will prompt for installing xcode-select, after that installs, enter the password and continue with the script.
 This script will clone the genesis repo into `/tmp/genesis` and then run it for you.
 
 ## After the install

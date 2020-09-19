@@ -1,7 +1,4 @@
 #!/usr/bin/env ruby
-cli_flags = ARGV.join(' ')
-
-system 'xcode-select --install'
 
 unless system('/usr/local/bin/brew -v')
   puts 'Installing homebrew...'
@@ -13,10 +10,4 @@ unless system('/usr/local/bin/ansible --version')
   system 'brew install ansible'
 end
 
-system 'git clone https://github.com/bangthetable/genesis.git /tmp/genesis'
-
-if cli_flags.empty?
-  system 'cd /tmp/genesis && ansible-playbook mac.yml -K -vvvv'
-else
-  system "cd /tmp/genesis && ansible-playbook mac.yml -K -vvvv --extra-vars '#{cli_flags}'"
-end
+system 'ansible-playbook mac.yml -K -vvvv'
